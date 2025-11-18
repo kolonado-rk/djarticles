@@ -64,3 +64,7 @@ $ Email address:
 $ Password: AdminUser2025*
 $ Password (again): 
 ```
+#### 6.Spustenie apky
+- cez bash: python manage.py runserver
+- cez pycharm chrobak!
+- v prehliadaci: 127.0.0.1:8000/admin alebo  127.0.0.1:8000/api
