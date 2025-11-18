@@ -8,7 +8,7 @@ $ mkdir djarticles        #vytvori projekt pre artikle
 $ cd djarticles
 $ python3.12 -m venv venv  #
 ```
-### Doinstalovat potrebne baliky 
+### Doinstalovat potrebne baliky pre django + postgresql
 ```shell script
 $ pip install django
 $ pip install psycopg2-binary
