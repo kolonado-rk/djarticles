@@ -53,3 +53,12 @@ $ python manage.py migrate
 #### 4.Routers
 - from rest_framework.routers import DefaultRouter
 - router.register(r'newsource', NewSourceView, basename='newsource')
+
+#### 5.Users na prihlasenie do aplikacie
+```shell script
+$ python manage.py createsuperuser
+$ Username (leave blank to use 'kolonado'): admin
+$ Email address:      
+$ Password: AdminUser2025*
+$ Password (again): 
+```
