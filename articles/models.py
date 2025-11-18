@@ -11,7 +11,7 @@ class NewSource(models.Model):
 
 class Article(models.Model):
     id = models.AutoField(primary_key=True)
-    source = models.ForeignKey(NewSource, on_delete=models.CASCADE, on_update=models.CASCADE)
+    source = models.ForeignKey(NewSource, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, blank=True)
     link = models.CharField(max_length=200, blank=True)
     published = models.DateTimeField(auto_now_add=True)
@@ -26,5 +26,5 @@ class Digest(models.Model):
 
 class DigestArticle(models.Model):
     id = models.AutoField(primary_key=True)
-    digest = models.ForeignKey(Digest, on_delete=models.CASCADE, on_update=models.CASCADE)
+    digest = models.ForeignKey(Digest, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)

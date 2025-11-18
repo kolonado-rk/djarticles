@@ -1,6 +1,6 @@
 # Project djarticles
 ###
-### Zalozit do adresara Projecty pre django novy project djarticles 
+### Adresar v Projecty pre novy project djarticles 
 ```shell script
 $ sudo apt install python3.12
 $ cd ~/Prjekty/django-app
@@ -8,10 +8,11 @@ $ mkdir djarticles        #vytvori projekt pre artikle
 $ cd djarticles
 $ python3.12 -m venv venv  #
 ```
-### Doinstalovat potrebne baliky pre django + postgresql
+### Instalacia potrebnych balikov pre django + postgresql
 ```shell script
 $ pip install django
 $ pip install psycopg2-binary
+$ pip install djangorestframework
 
 $ django-admin startproject djarticles .
 $ python manage.py startapp articles
@@ -32,6 +33,23 @@ $ python manage.py startapp articles
 - migracia struktur z modelov do db articles
 ```shell script
 $ python manage.py makemigration
-$ python manage.py migrate  
+$ python manage.py migrate 
 ```
 
+### Vystavba aplikacie - casti:
+#### 1.Models 
+- from django.db import models
+- tvorba class NewSource(models.Model)
+
+#### 2.Serializers
+- from rest_framework import serializers
+- from articles.models import NewSource, Article, Digest, DigestArticle
+- class NewSourceSerializer(serializers.ModelSerializer)
+
+#### 3.Views
+- from rest_framework import viewsets
+- class NewSourceView(viewsets.ModelViewSet)
+
+#### 4.Routers
+- from rest_framework.routers import DefaultRouter
+- router.register(r'newsource', NewSourceView, basename='newsource')
