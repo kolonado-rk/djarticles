@@ -49,6 +49,8 @@ $ python manage.py migrate
 #### 3.Views
 - from rest_framework import viewsets
 - class NewSourceView(viewsets.ModelViewSet)
+- nezabudnut pridat def index(request):
+    return HttpResponse("Articles API beží 🙂")
 
 #### 4.Routers
 - from rest_framework.routers import DefaultRouter
