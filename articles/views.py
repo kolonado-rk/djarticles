@@ -1,10 +1,15 @@
 import json
+
+from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
 
 from articles.models import NewSource, Article, Digest, DigestArticle
 from articles.serializers import NewSourceSerializer, ArticleSerializer, DigestSerializer, DigestArticleSerializer
 
+
+def index(request):
+    return HttpResponse("Articles API beží 🙂")
 
 class NewSourceView(viewsets.ModelViewSet):
     queryset = NewSource.objects.all()
