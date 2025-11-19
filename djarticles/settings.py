@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'djarticles.wsgi.application'
 
 DATABASES = {
     'default': {
-	'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'articles',
         'USER': 'art_user',
         'PASSWORD': 'article_user',
