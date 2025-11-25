@@ -20,7 +20,7 @@ $ python manage.py startapp articles
 
 ### Postgres 16 
 - vytvorenie databazy articles
-- vyvorenie uzivatela art_user
+- vytvorenie uzivatela art_user
 - pridelenie prav
 ```shell script
 # CREATE DATABASE articles;
