@@ -46,15 +46,26 @@ class DigestArticleView(viewsets.ModelViewSet):
 def admin_article_filter_view(request):
     form = ArticleFilterForm(request.GET or None)
 
-    # základ: všetky články
-    queryset = Article.objects.select_related("source").all()
+    queryset = Article.objects.select_related("source").all().order_by("-published")
 
     if form.is_valid():
-        article = form.cleaned_data.get("article")
+        q = form.cleaned_data.get("q")
+        source = form.cleaned_data.get("source")
+        date_from = form.cleaned_data.get("date_from")
+        date_to = form.cleaned_data.get("date_to")
         only_recent = form.cleaned_data.get("only_recent")
 
-        if article:
-            queryset = queryset.filter(pk=article.pk)
+        if q:
+            queryset = queryset.filter(title__icontains=q)
+
+        if source:
+            queryset = queryset.filter(source=source)
+
+        if date_from:
+            queryset = queryset.filter(published__date__gte=date_from)
+
+        if date_to:
+            queryset = queryset.filter(published__date__lte=date_to)
 
         if only_recent:
             seven_days_ago = timezone.now() - timedelta(days=7)

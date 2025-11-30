@@ -13,20 +13,37 @@
     <h1 class="h4 mb-3">Filter článkov (admin)</h1>
 
     <form method="get" class="row g-3 mb-4">
-        <div class="col-md-6">
-            <label class="form-label">Článok</label>
-            {{ form.article }}
+        <div class="col-md-4">
+            <label class="form-label">Hľadať v názve</label>
+            {{ form.q }}
         </div>
+
         <div class="col-md-3">
-            <div class="form-check mt-4">
+            <label class="form-label">Zdroj</label>
+            {{ form.source }}
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Od</label>
+            {{ form.date_from }}
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Do</label>
+            {{ form.date_to }}
+        </div>
+
+        <div class="col-md-1 d-flex align-items-end">
+            <div class="form-check">
                 {{ form.only_recent }}
-                <label class="form-check-label">
-                    Len články za posledných 7 dní
+                <label class="form-check-label" style="font-size: 0.8rem">
+                    7 dní
                 </label>
             </div>
         </div>
-        <div class="col-md-3 d-flex align-items-end">
-            <button type="submit" class="btn btn-primary w-100">
+
+        <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">
                 Filtrovať
             </button>
         </div>

@@ -1,12 +1,30 @@
 from django import forms
-from .models import Article
+from .models import Article, NewSource
 
 
 class ArticleFilterForm(forms.Form):
-    article = forms.ModelChoiceField(
-        queryset=Article.objects.all(),
+    q = forms.CharField(
         required=False,
-        label="Článok",
+        label="Hľadať v názve",
+    )
+
+    source = forms.ModelChoiceField(
+        queryset=NewSource.objects.all(),
+        required=False,
+        label="Zdroj",
+        empty_label="Všetky zdroje",
+    )
+
+    date_from = forms.DateField(
+        required=False,
+        label="Publikované od",
+        widget=forms.DateInput(attrs={"type": "date"}),
+    )
+
+    date_to = forms.DateField(
+        required=False,
+        label="Publikované do",
+        widget=forms.DateInput(attrs={"type": "date"}),
     )
 
     only_recent = forms.BooleanField(
