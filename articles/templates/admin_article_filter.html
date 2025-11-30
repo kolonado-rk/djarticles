@@ -31,7 +31,7 @@
             </button>
         </div>
     </form>
-ss
+
     <h2 class="h5">Výsledky</h2>
 
     {% if results %}
@@ -39,16 +39,24 @@ ss
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Article</th>
-                    <th>Ďalšie polia…</th>
+                    <th>Názov</th>
+                    <th>Zdroj</th>
+                    <th>Link</th>
+                    <th>Publikované</th>
                 </tr>
             </thead>
             <tbody>
-                {% for obj in results %}
+                {% for art in results %}
                     <tr>
-                        <td>{{ obj.id }}</td>
-                        <td>{{ obj.article }}</td>
-                        <td>...</td>
+                        <td>{{ art.id }}</td>
+                        <td>{{ art.title }}</td>
+                        <td>{{ art.source }}</td>
+                        <td>
+                            {% if art.link %}
+                                <a href="{{ art.link }}" target="_blank">link</a>
+                            {% endif %}
+                        </td>
+                        <td>{{ art.published }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

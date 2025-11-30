@@ -14,29 +14,6 @@ from .forms import ArticleFilterForm
 from .models import Article, DigestArticle
 
 
-@staff_member_required
-def admin_article_filter_view(request):
-    form = ArticleFilterForm(request.GET or None)
-
-    queryset = DigestArticle.objects.select_related("article").all()
-
-    if form.is_valid():
-        article = form.cleaned_data.get("article")
-        only_recent = form.cleaned_data.get("only_recent")
-
-        if article:
-            queryset = queryset.filter(article=article)
-
-        if only_recent:
-            seven_days_ago = timezone.now() - timedelta(days=7)
-            queryset = queryset.filter(article__published__gte=seven_days_ago)
-
-    context = {
-        "form": form,
-        "results": queryset,
-    }
-    return render(request, "admin_article_filter.html", context)
-
 @login_required
 def index(request):
     return render(request, "index.html")
@@ -69,18 +46,19 @@ class DigestArticleView(viewsets.ModelViewSet):
 def admin_article_filter_view(request):
     form = ArticleFilterForm(request.GET or None)
 
-    queryset = DigestArticle.objects.select_related("article").all()
+    # základ: všetky články
+    queryset = Article.objects.select_related("source").all()
 
     if form.is_valid():
         article = form.cleaned_data.get("article")
         only_recent = form.cleaned_data.get("only_recent")
 
         if article:
-            queryset = queryset.filter(article=article)
+            queryset = queryset.filter(pk=article.pk)
 
         if only_recent:
             seven_days_ago = timezone.now() - timedelta(days=7)
-            queryset = queryset.filter(article__published__gte=seven_days_ago)
+            queryset = queryset.filter(published__gte=seven_days_ago)
 
     context = {
         "form": form,
