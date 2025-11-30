@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles API – Dashboard</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand">Articles API</span>
+        <div class="d-flex">
+            <span class="navbar-text me-3">
+                Prihlásený: {{ request.user.username }}
+            </span>
+            <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">
+                Odhlásiť sa
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h4 mb-3">Vitaj v Articles API</h1>
+            <p>
+                Si prihlásený ako <strong>{{ request.user.username }}</strong>.
+            </p>
+
+            <p>API endpointy:</p>
+            <ul>
+                <li><code>/api/newsource/</code></li>
+                <li><code>/api/article/</code></li>
+                <li><code>/api/digest/</code></li>
+                <li><code>/api/digestarticle/</code></li>
+            </ul>
+
+            <p class="text-muted mb-0">
+                Tieto endpointy sú chránené – prístup máš len ako prihlásený používateľ.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -17,8 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = [
-    path("admin/", admin.site.urls),      # Django admin
-    path("", include("articles.urls")),   # všetko z appky articles
-]
+#urlpatterns = [
+#    path("admin/", admin.site.urls),      # Django admin
+#    path("", include("articles.urls")),   # všetko z appky articles
+#]
 
+urlpatterns = [
+    # ...
+    path("api-auth/", include("rest_framework.urls")),
+    path("", include("articles.urls")),   # všetko z appky articles
+    # tvoje dalsie path(...)
+]
