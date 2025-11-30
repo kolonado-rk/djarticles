@@ -14,17 +14,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# djarticles/urls.py
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
-#urlpatterns = [
-#    path("admin/", admin.site.urls),      # Django admin
-#    path("", include("articles.urls")),   # všetko z appky articles
-#]
+from articles.views import admin_article_filter_view  # <- import nášho view
 
 urlpatterns = [
-    # ...
+    path("admin/", admin.site.urls),
+
+    path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+
+    # DRF browsable API login
     path("api-auth/", include("rest_framework.urls")),
-    path("", include("articles.urls")),   # všetko z appky articles
-    # tvoje dalsie path(...)
+
+    # naša „admin“ stránka, ale mimo /admin/ prefixu:
+    path("articles/filter/", admin_article_filter_view, name="admin_article_filter"),
+
+    # appkové URL (index, /api/ atď.)
+    path("", include("articles.urls")),
 ]

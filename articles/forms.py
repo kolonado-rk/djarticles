@@ -3,14 +3,13 @@ from .models import Article
 
 
 class ArticleFilterForm(forms.Form):
-    articles = forms.ModelMultipleChoiceField(
+    article = forms.ModelChoiceField(
         queryset=Article.objects.all(),
         required=False,
-        label="Články",
-        widget=forms.SelectMultiple,  # alebo CheckboxSelectMultiple
+        label="Článok",
     )
 
-    only_published = forms.BooleanField(
+    only_recent = forms.BooleanField(
         required=False,
-        label="Len publikované",
+        label="Len články za posledných 7 dní",
     )
