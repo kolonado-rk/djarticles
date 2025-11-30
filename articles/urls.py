@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 
 from . import views
 from .views import NewSourceView, ArticleView, DigestView, DigestArticleView
+from .views import admin_article_filter_view  # <- pridaj import
 
 router = DefaultRouter()
 router.register(r'newsource', NewSourceView, basename='newsource')
@@ -17,12 +18,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # login/logout
-    path(
-        "login/",
-        auth_views.LoginView.as_view(template_name="login.html"),
-        name="login",
-    ),
+    path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("admin/articles/filter/", admin_article_filter_view, name="admin_article_filter"),
 
     # tvoje stránky / API
     path("", views.index, name="articles_index"),  # GET / -> index
