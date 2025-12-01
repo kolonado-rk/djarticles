@@ -15,14 +15,7 @@ router.register(r'digestarticle', DigestArticleView, basename='digestarticle')
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-
-    # login/logout
-    path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path("admin/articles/filter/", admin_article_filter_view, name="admin_article_filter"),
-
-    # tvoje stránky / API
+    # iba appkové veci, žiadny admin tu:
     path("", views.index, name="articles_index"),  # GET / -> index
     path("api/", include(router.urls)),            # /api/... -> DRF viewsety
 ]
