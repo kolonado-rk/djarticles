@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -73,17 +74,26 @@ WSGI_APPLICATION = 'djarticles.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'articles',
-        'USER': 'art_user',
-        'PASSWORD': 'article_user',
-        'HOST': 'localhost',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_DB", "djarticles"),
+        "USER": os.environ.get("POSTGRES_USER", "djuser"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "djpass"),
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+        "PORT": os.environ.get("POSTGRES_PORT", "5432"),
     }
 }
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'articles',
+#        'USER': 'art_user',
+#        'PASSWORD': 'article_user',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+#}
 
 
 # Password validation
@@ -138,11 +148,19 @@ REST_FRAMEWORK = {
 }
 
 # Celery settings
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "redis://localhost:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", "redis://localhost:6379/1")
 
-# (voliteľné, ale fajn mať)
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
-CELERY_TIMEZONE = TIME_ZONE  # použiješ rovnakú ako Django
+CELERY_TIMEZONE = TIME_ZONE
+
+#CELERY_BROKER_URL = "redis://localhost:6379/0"
+#CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
+
+# (voliteľné, ale fajn mať)
+#CELERY_ACCEPT_CONTENT = ["json"]
+#CELERY_TASK_SERIALIZER = "json"
+#CELERY_RESULT_SERIALIZER = "json"
+#CELERY_TIMEZONE = TIME_ZONE  # použiješ rovnakú ako Django
